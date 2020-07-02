@@ -72,3 +72,9 @@ GO
 
 SET IDENTITY_INSERT IdentityResourceProperties OFF;  
 GO
+
+-- ApiScopes -> ApiResourceScopes
+INSERT INTO configuration.ApiResourceScopes (Scope, ApiResourceId)
+SELECT Name, ApiResourceId
+FROM configuration.ApiScopes
+GO
