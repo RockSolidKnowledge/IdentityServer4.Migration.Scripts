@@ -115,7 +115,9 @@ CREATE TABLE "ApiResourcesTemp" (
     "Created" TEXT NOT NULL,
     "Updated" TEXT NULL,
     "LastAccessed" TEXT NULL,
-    "NonEditable" INTEGER NOT NULL
+    "NonEditable" INTEGER NOT NULL,
+	"AllowedAccessTokenSigningAlgorithms" TEXT NULL,
+	"ShowInDiscoveryDocument" INTEGER NOT NULL
 );
 
 
@@ -125,8 +127,8 @@ CREATE TABLE "ApiResourcesTemp" (
 CREATE TABLE "ApiScopeClaimsTemp" (
     "Id" INTEGER NOT NULL CONSTRAINT "PK_ApiScopeClaims" PRIMARY KEY AUTOINCREMENT,
     "Type" TEXT NOT NULL,
-    "ApiScopeId" INTEGER NOT NULL,
-    CONSTRAINT "FK_ApiScopeClaims_ApiScopes_ApiScopeId" FOREIGN KEY ("ApiScopeId") REFERENCES "ApiScopes" ("Id") ON DELETE CASCADE
+    "ScopeId" INTEGER NOT NULL,
+    CONSTRAINT "FK_ApiScopeClaims_ApiScopes_ScopeId" FOREIGN KEY ("ScopeId") REFERENCES "ApiScopes" ("Id") ON DELETE CASCADE
 );
 
 
@@ -140,7 +142,8 @@ CREATE TABLE "ApiScopesTemp" (
     "Description" TEXT NULL,
     "Required" INTEGER NOT NULL,
     "Emphasize" INTEGER NOT NULL,
-    "ShowInDiscoveryDocument" INTEGER NOT NULL
+    "ShowInDiscoveryDocument" INTEGER NOT NULL,
+	"Enabled" INTEGER NOT NULL
 );
 
 
@@ -251,11 +254,14 @@ FROM "IdentityProperties";
 INSERT INTO "ApiResourcesTemp"
  ("Id", "Enabled", "Name", "DisplayName",
   "Description", "Created", "Updated",
-  "LastAccessed", "NonEditable")
+  "LastAccessed", "NonEditable",
+  "AllowedAccessTokenSigningAlgorithms",
+  "ShowInDiscoveryDocument"  )
 SELECT 
  "Id", "Enabled", "Name", "DisplayName",
  "Description", "Created", "Updated",
- "LastAccessed", "NonEditable"
+ "LastAccessed", "NonEditable",
+ NULL, 0
 FROM "ApiResources"; 
 
 ALTER TABLE "ApiResources"
@@ -273,7 +279,7 @@ CREATE UNIQUE INDEX "IX_ApiResources_Name" ON "ApiResources" ("Name");
 -- ApiScopeClaims -> ApiScopeClaimsTemp
 
 INSERT INTO "ApiScopeClaimsTemp"
- ("Id", "Type", "ApiScopeId")
+ ("Id", "Type", "ScopeId")
 SELECT 
  "Id", "Type", "ApiScopeId"
 FROM "ApiScopeClaims";
@@ -294,11 +300,11 @@ CREATE INDEX "IX_ApiScopeClaims_ApiScopeId" ON "ApiScopeClaims" ("ApiScopeId");
 INSERT INTO "ApiScopesTemp"
    ("Id", "Name", "DisplayName",
     "Description", "Required","Emphasize",
-    "ShowInDiscoveryDocument")
+    "ShowInDiscoveryDocument", "Enabled")
 SELECT 
    "Id", "Name", "DisplayName",
    "Description", "Required","Emphasize",
-   "ShowInDiscoveryDocument"
+   "ShowInDiscoveryDocument", 1
 FROM "ApiScopes";
 
 ALTER TABLE ApiScopes
@@ -315,6 +321,7 @@ DROP INDEX IF EXISTS "IX_ApiScopes_Name";
 CREATE UNIQUE INDEX "IX_ApiScopes_Name" ON "ApiScopes" ("Name");
 
 
+-- ApiScopes -> ApiResourceScopes
 INSERT INTO "ApiResourceScopes"
  ("Scope", "ApiResourceId")
 SELECT 
@@ -337,7 +344,7 @@ INSERT INTO "ClientsTemp"
     "RefreshTokenExpiration", "AccessTokenType", "EnableLocalLogin", "IncludeJwtId",
     "AlwaysSendClientClaims", "ClientClaimsPrefix", "PairWiseSubjectSalt", "Created",
     "Updated", "LastAccessed", "UserSsoLifetime", "UserCodeType", "DeviceCodeLifetime",
-    "NonEditable")
+    "NonEditable", "AllowedIdentityTokenSigningAlgorithms", "RequireRequestObject")
 SELECT 
    "Id", "Enabled", "ClientId", "ProtocolType", "RequireClientSecret",
     "ClientName", "Description", "ClientUri", "LogoUri", "RequireConsent",
@@ -350,7 +357,7 @@ SELECT
     "RefreshTokenExpiration", "AccessTokenType", "EnableLocalLogin", "IncludeJwtId",
     "AlwaysSendClientClaims", "ClientClaimsPrefix", "PairWiseSubjectSalt", "Created",
     "Updated", "LastAccessed", "UserSsoLifetime", "UserCodeType", "DeviceCodeLifetime",
-    "NonEditable"
+    "NonEditable", NULL, NULL
 FROM "Clients";
 
 ALTER TABLE Clients
