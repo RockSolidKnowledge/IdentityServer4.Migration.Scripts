@@ -193,6 +193,8 @@ CREATE TABLE "ClientsTemp" (
     "UserCodeType" TEXT NULL,
     "DeviceCodeLifetime" INTEGER NOT NULL,
     "NonEditable" INTEGER NOT NULL
+    "AllowedIdentityTokenSigningAlgorithms" TEXT NULL,
+    "RequireRequestObject" INTEGER NULL
 );
 
 
