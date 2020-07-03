@@ -208,9 +208,9 @@ GO
 -- ApiScopes -> ApiResourceScopes
 
 INSERT INTO ApiResourceScopes 
- ([Scope], ApiResourceId)
+ ([Scope], [ApiResourceId])
 SELECT 
- Name, ApiResourceId
+ [Name], [ApiResourceId]
 FROM ApiScopes
 
 -- Alter Existing Tables

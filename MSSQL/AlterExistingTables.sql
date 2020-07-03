@@ -53,7 +53,7 @@ ALTER TABLE ApiScopes
 
 UPDATE ApiScopes SET Enabled = 1
 
-ALTER TABLE ApiResources 
+ALTER TABLE ApiScopes
 	ALTER COLUMN Enabled BIT NOT NULL
 
 
