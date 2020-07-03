@@ -8,15 +8,15 @@ SessionId and Descriptions columns are added with NULL values
 ###PersistedGrants
 SessionId, Description and ConsumedTime columns are added, all with null values. An index is added using SubjectId, SessionId and Type.
 
-#What the ConfigurationDbContext script aims to achieve 
+#What the ConfigurationDbContext script aims to achieve
 
 ##Add New Tables
 Two new additional tables are added for IdentityServer4 V4:
-•	ApiResourceScopes 
+•	ApiResourceScopes
 •	ApiScopeProperties
 
 ##Replace Existing Tables
-For MSSQL, PostgreSQL and MySQL, the are five tables added that serve the purpose of replacing tables that have changed name: 
+For MSSQL, PostgreSQL and MySQL, the are five tables added that serve the purpose of replacing tables that have changed name:
 •	ApiResourceClaims to replace ApiClaims
 •	ApiResourceProperties to replace ApiProperties
 •	ApiResourceSecrets to replace ApiSecrets
