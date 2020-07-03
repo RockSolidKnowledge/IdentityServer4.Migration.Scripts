@@ -68,6 +68,9 @@ ALTER TABLE ApiScopes
 	
 DROP INDEX IX_ApiScopes_ApiResourceId
 	ON ApiScopes
+
+ALTER TABLE ApiScopes
+DROP COLUMN ApiResourceId;
 	
 --MSSQL
 
