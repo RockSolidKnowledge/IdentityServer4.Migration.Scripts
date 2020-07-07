@@ -192,7 +192,7 @@ CREATE TABLE "ClientsTemp" (
     "UserSsoLifetime" INTEGER NULL,
     "UserCodeType" TEXT NULL,
     "DeviceCodeLifetime" INTEGER NOT NULL,
-    "NonEditable" INTEGER NOT NULL
+    "NonEditable" INTEGER NOT NULL,
     "AllowedIdentityTokenSigningAlgorithms" TEXT NULL,
     "RequireRequestObject" INTEGER NULL
 );
@@ -328,7 +328,7 @@ INSERT INTO "ApiResourceScopes"
  ("Scope", "ApiResourceId")
 SELECT 
  "Name", "ApiResourceId"
-FROM "ApiScopes"
+FROM "ApiScopes";
 
 
 
@@ -369,7 +369,7 @@ ALTER TABLE ClientsTemp
   RENAME TO Clients;
 
 DROP INDEX IF EXISTS "IX_Clients_ClientId";
-CREATE UNIQUE INDEX "IX_Clients_ClientId" ON "Clients" ("ClientId"); 
+CREATE UNIQUE INDEX "IX_Clients_ClientId" ON "Clients" ("ClientId");
 
  
 

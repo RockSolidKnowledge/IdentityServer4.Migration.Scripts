@@ -166,7 +166,7 @@ INSERT INTO "ApiResourceScopes"
  ("Scope", "ApiResourceId")
 SELECT 
  "Name", "ApiResourceId"
-FROM "ApiScopes"
+FROM "ApiScopes";
 
 -- Alter Existing Tables
 

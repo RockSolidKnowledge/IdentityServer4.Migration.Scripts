@@ -1,4 +1,4 @@
-# What the MigrationDbContext script aims to achieve
+# What the PersistedGrantDbContext script aims to achieve
 
 ## Alter Existing Tables
 
