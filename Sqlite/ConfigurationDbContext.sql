@@ -276,7 +276,12 @@ ALTER TABLE "ApiResourcesTemp"
 DROP INDEX IF EXISTS "IX_ApiResources_Name";
 CREATE UNIQUE INDEX "IX_ApiResources_Name" ON "ApiResources" ("Name");
 
-
+-- ApiScopes -> ApiResourceScopes
+INSERT INTO "ApiResourceScopes"
+ ("Scope", "ApiResourceId")
+SELECT 
+ "Name", "ApiResourceId"
+FROM "ApiScopes";
 
 -- ApiScopeClaims -> ApiScopeClaimsTemp
 
@@ -321,15 +326,6 @@ CREATE INDEX "IX_ApiScopes_ApiResourceId" ON "ApiScopes" ("ApiResourceId");
 
 DROP INDEX IF EXISTS "IX_ApiScopes_Name";
 CREATE UNIQUE INDEX "IX_ApiScopes_Name" ON "ApiScopes" ("Name");
-
-
--- ApiScopes -> ApiResourceScopes
-INSERT INTO "ApiResourceScopes"
- ("Scope", "ApiResourceId")
-SELECT 
- "Name", "ApiResourceId"
-FROM "ApiScopes";
-
 
 
 -- Clients -> ClientsTemp
