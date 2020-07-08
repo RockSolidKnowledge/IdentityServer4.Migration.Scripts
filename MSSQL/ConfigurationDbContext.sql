@@ -1,3 +1,4 @@
+BEGIN TRANSACTION
 
 --Add New Tables
 
@@ -298,3 +299,5 @@ ALTER TABLE Clients
 --DROP TABLE ApiSecrets
 --DROP TABLE IdentityClaims
 --DROP TABLE IdentityProperties
+
+COMMIT TRANSACTION

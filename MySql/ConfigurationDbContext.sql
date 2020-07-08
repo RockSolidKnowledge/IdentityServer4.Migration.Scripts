@@ -1,3 +1,4 @@
+START TRANSACTION;
 
 -- Add New Tables
 
@@ -243,8 +244,10 @@ SET SQL_SAFE_UPDATES = @OLDSAFEUPDATEVALUE;
 			
 -- Delete Old Tables
 
--- DROP TABLE `ApiClaims`
--- DROP TABLE `ApiProperties`
--- DROP TABLE `ApiSecrets`
--- DROP TABLE `IdentityClaims`
--- DROP TABLE `IdentityProperties`
+-- DROP TABLE `ApiClaims`;
+-- DROP TABLE `ApiProperties`;
+-- DROP TABLE `ApiSecrets`;
+-- DROP TABLE `IdentityClaims`;
+-- DROP TABLE `IdentityProperties`;
+
+COMMIT;

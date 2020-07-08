@@ -1,3 +1,5 @@
+START TRANSACTION;
+
 -- Alter Existing Tables
 
 -- DeviceCodes
@@ -19,6 +21,8 @@ ALTER TABLE `PersistedGrants`
 	ADD `Description` nvarchar(200) NULL;
 	
 ALTER TABLE `PersistedGrants`
-	ADD `ConsumedTime` datetime2(7) NULL;
+	ADD `ConsumedTime` date NULL;
 
 ALTER TABLE `PersistedGrants` ADD INDEX `IX_PersistedGrants_SubjectId_SessionId_Type`  (`SubjectId`, `SessionId`, Type);
+
+COMMIT;

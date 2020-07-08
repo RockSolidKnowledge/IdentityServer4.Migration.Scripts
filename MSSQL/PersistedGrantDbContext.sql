@@ -1,4 +1,6 @@
 
+BEGIN TRANSACTION
+
 -- Alter Existing Tables
 
 -- DeviceCodes
@@ -24,3 +26,5 @@ ALTER TABLE PersistedGrants
 
 CREATE NONCLUSTERED INDEX IX_PersistedGrants_SubjectId_SessionId_Type
     ON PersistedGrants(SubjectId ASC, SessionId ASC, Type ASC);
+
+COMMIT TRANSACTION;

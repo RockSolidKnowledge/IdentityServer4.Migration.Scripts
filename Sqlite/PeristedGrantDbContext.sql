@@ -1,3 +1,4 @@
+BEGIN TRANSACTION;
 
 -- Alter Existing Tables
 
@@ -13,3 +14,5 @@ ALTER TABLE "PersistedGrants" ADD "Description" TEXT NULL;
 ALTER TABLE "PersistedGrants" ADD "ConsumedTime" TEXT NULL;
 
 CREATE INDEX "IX_PersistedGrants_SubjectId_SessionId_Type" ON "PersistedGrants" ("SubjectId", "SessionId", "Type");
+
+COMMIT;

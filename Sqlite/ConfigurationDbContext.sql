@@ -1,3 +1,4 @@
+BEGIN TRANSACTION;
 
 -- Add New Tables
  
@@ -385,3 +386,5 @@ CREATE UNIQUE INDEX "IX_Clients_ClientId" ON "Clients" ("ClientId");
 -- DROP TABLE "ApiScopeClaims_Backup";
 -- DROP TABLE "ApiScopes_Backup";
 -- DROP TABLE "Clients_Backup";
+
+COMMIT;

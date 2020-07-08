@@ -1,3 +1,4 @@
+BEGIN;
 
 -- Alter Existing Tables
 
@@ -23,3 +24,5 @@ ALTER TABLE "PersistedGrants"
 	ADD "ConsumedTime" timestamp without time zone NULL;
 
 CREATE INDEX "IX_PersistedGrants_SubjectId_SessionId_Type" ON "PersistedGrants" ("SubjectId", "SessionId", "Type");
+
+COMMIT;
