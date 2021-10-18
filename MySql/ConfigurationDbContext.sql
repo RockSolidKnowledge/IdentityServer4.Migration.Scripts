@@ -5,7 +5,7 @@ START TRANSACTION;
 -- Add ApiResourceScopes
 
 CREATE TABLE `ApiResourceScopes` (
-    `Id` int NOT NULL,
+    `Id` int NOT NULL AUTO_INCREMENT,
     `Scope` nvarchar(200) NOT NULL,
     `ApiResourceId` int NOT NULL,
     CONSTRAINT `PK_ApiResourceScopes` PRIMARY KEY (`Id`),
@@ -19,7 +19,7 @@ CREATE INDEX `IX_ApiResourceScopes_ApiResourceId` ON `ApiResourceScopes` (`ApiRe
 -- Add ApiScopeProperties
 
 CREATE TABLE `ApiScopeProperties` (
-    `Id` int NOT NULL,
+    `Id` int NOT NULL AUTO_INCREMENT,
     `Key` nvarchar(250) NOT NULL,
     `Value` nvarchar(2000) NOT NULL,
     `ScopeId` int NOT NULL,
@@ -36,7 +36,7 @@ CREATE INDEX `IX_ApiScopeProperties_ScopeId` ON `ApiScopeProperties` (`ScopeId`)
 -- ApiResourceClaims
 
 CREATE TABLE `ApiResourceClaims` (
-    `Id` int NOT NULL,
+    `Id` int NOT NULL AUTO_INCREMENT,
     `Type` nvarchar(200) NOT NULL,
     `ApiResourceId` int NOT NULL,
     CONSTRAINT `PK_ApiResourceClaims` PRIMARY KEY (`Id`),
@@ -50,7 +50,7 @@ CREATE INDEX `IX_ApiResourceClaims_ApiResourceId` ON `ApiResourceClaims` (`ApiRe
 -- ApiResourceProperties
 
 CREATE TABLE `ApiResourceProperties` (
-    `Id` int NOT NULL,
+    `Id` int NOT NULL AUTO_INCREMENT,
     `Key` nvarchar(250) NOT NULL,
     `Value` nvarchar(2000) NOT NULL,
     `ApiResourceId` int NOT NULL,
@@ -65,7 +65,7 @@ CREATE INDEX `IX_ApiResourceProperties_ApiResourceId` ON `ApiResourceProperties`
 -- Add ApiResourceSecrets
 
 CREATE TABLE `ApiResourceSecrets` (
-    `Id` int NOT NULL,
+    `Id` int NOT NULL AUTO_INCREMENT,
     `Description` nvarchar(1000) NULL,
     `Value` nvarchar(4000) NOT NULL,
     `Expiration` date NULL,
@@ -83,7 +83,7 @@ CREATE INDEX `IX_ApiResourceSecrets_ApiResourceId` ON `ApiResourceSecrets` (`Api
 -- IdentityResourceClaims
 
 CREATE TABLE `IdentityResourceClaims` (
-    `Id` int NOT NULL,
+    `Id` int NOT NULL AUTO_INCREMENT,
     `Type` nvarchar(200) NOT NULL,
     `IdentityResourceId` int NOT NULL,
     CONSTRAINT `PK_IdentityResourceClaims` PRIMARY KEY (`Id`),
@@ -97,7 +97,7 @@ CREATE INDEX `IX_IdentityResourceClaims_IdentityResourceId` ON `IdentityResource
 -- IdentityResourceProperties
 
 CREATE TABLE `IdentityResourceProperties` (
-    `Id` int NOT NULL,
+    `Id` int NOT NULL AUTO_INCREMENT,
     `Key` nvarchar(250) NOT NULL,
     `Value` nvarchar(2000) NOT NULL,
     `IdentityResourceId` int NOT NULL,
@@ -162,9 +162,9 @@ FROM `IdentityProperties`;
 
 -- ApiScopes -> ApiResourceScopes
 INSERT INTO `ApiResourceScopes` 
- (`Scope`, `ApiResourceId`)
+ (`Id`, `Scope`, `ApiResourceId`)
 SELECT 
- `Name`, `ApiResourceId`
+ `Id`, `Name`, `ApiResourceId`
 FROM `ApiScopes`;
 
 
