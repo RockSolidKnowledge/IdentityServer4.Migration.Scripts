@@ -21,7 +21,7 @@ ALTER TABLE `PersistedGrants`
 	ADD `Description` nvarchar(200) NULL;
 	
 ALTER TABLE `PersistedGrants`
-	ADD `ConsumedTime` date NULL;
+	ADD `ConsumedTime` datetime NULL;
 
 ALTER TABLE `PersistedGrants` ADD INDEX `IX_PersistedGrants_SubjectId_SessionId_Type`  (`SubjectId`, `SessionId`, Type);
 
