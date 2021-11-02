@@ -68,9 +68,9 @@ CREATE TABLE `ApiResourceSecrets` (
     `Id` int NOT NULL AUTO_INCREMENT,
     `Description` nvarchar(1000) NULL,
     `Value` nvarchar(4000) NOT NULL,
-    `Expiration` date NULL,
+    `Expiration` datetime NULL,
     `Type` nvarchar(250) NOT NULL,
-    `Created` date NOT NULL,
+    `Created` datetime NOT NULL,
     `ApiResourceId` int NOT NULL,
     CONSTRAINT `PK_ApiResourceSecrets` PRIMARY KEY (`Id`),
     CONSTRAINT `FK_ApiResourceSecrets_ApiResources_ApiResourceId` FOREIGN KEY (`ApiResourceId`) REFERENCES `ApiResources` (`Id`) ON DELETE CASCADE
@@ -175,17 +175,17 @@ SET SQL_SAFE_UPDATES = 0;
 -- ApiResources	
 
 ALTER TABLE `ApiResources`
-	ADD `AllowedAccessTokenSigningAlgorithms` nvarchar (100)
+	ADD `AllowedAccessTokenSigningAlgorithms` nvarchar(100)
 	NULL;
 	
 ALTER TABLE `ApiResources`
-	ADD `ShowInDiscoveryDocument` bit
+	ADD `ShowInDiscoveryDocument` tinyint(1)
 	NULL;
 	
 UPDATE `ApiResources` SET `ShowInDiscoveryDocument` = 0;
 
 ALTER TABLE `ApiResources`
-	MODIFY `ShowInDiscoveryDocument` bit NOT NULL;
+	MODIFY `ShowInDiscoveryDocument` tinyint(1) NOT NULL;
 	
 	
 
@@ -216,12 +216,12 @@ DROP INDEX `IX_ApiScopes_ApiResourceId`
 	ON `ApiScopes`;
 	
 ALTER TABLE `ApiScopes`
-	ADD `Enabled` bit NULL;
+	ADD `Enabled` tinyint(1) NULL;
 
 UPDATE `ApiScopes` SET Enabled = 1;
 
 ALTER TABLE `ApiScopes` 
-	MODIFY `Enabled` bit NOT NULL;
+	MODIFY `Enabled` tinyint(1) NOT NULL;
 		
 ALTER TABLE `ApiScopes`
 	DROP COLUMN `ApiResourceId`;
@@ -233,12 +233,12 @@ ALTER TABLE `Clients`
 	ADD `AllowedIdentityTokenSigningAlgorithms` nvarchar(100) NULL;
 	
 ALTER TABLE `Clients`
-	ADD `RequireRequestObject` bit NULL;
+	ADD `RequireRequestObject` tinyint(1) NULL;
 	
 UPDATE `Clients` SET `RequireRequestObject` = 0;
 	
 ALTER TABLE `Clients`
-	MODIFY `RequireRequestObject` bit NOT NULL;
+	MODIFY `RequireRequestObject` tinyint(1) NOT NULL;
 	
 SET SQL_SAFE_UPDATES = @OLDSAFEUPDATEVALUE;
 			
